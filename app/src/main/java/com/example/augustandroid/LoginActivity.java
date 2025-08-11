@@ -2,6 +2,7 @@ package com.example.augustandroid;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,12 +35,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userId=edtPhone.getText().toString();
                 String password=edtPassword.getText().toString();
+                SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
                 if (userId.isEmpty() || password.isEmpty())
                 {
                     Toast.makeText(LoginActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 }else if (userId.equals("9876543210") && password.equals("123456"))
                 {
-                    Intent intent=new Intent(getApplicationContext(),ActivityLifecycle.class);
+                    editor.putString("loginStatus","true");
+                    editor.commit();
+                    Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
                     startActivity(intent);
                     Log.e("Login","Login Success");
                 }else {

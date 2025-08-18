@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AugustAndroid">
         <activity
+            android:name=".PhoneActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecyclerActivity"
             android:exported="false" />
         <activity

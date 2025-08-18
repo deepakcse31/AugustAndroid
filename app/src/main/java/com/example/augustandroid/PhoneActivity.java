@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.augustandroid.databinding.ActivityPhoneBinding;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -21,24 +22,21 @@ import retrofit2.Response;
 
 public class PhoneActivity extends AppCompatActivity {
 
-    EditText edtphoneno;
-    Button btnLogin;
-
+    ActivityPhoneBinding binding;
     ApiService apiService;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_phone);
-        edtphoneno=findViewById(R.id.edtphoneno);
-        btnLogin=findViewById(R.id.btnlogin);
+        binding=ActivityPhoneBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         apiService=ApiClient.getClient().create(ApiService.class);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String enterPhoneNo=edtphoneno.getText().toString();
+                String enterPhoneNo=binding.edtphoneno.getText().toString();
                 createUser(enterPhoneNo);
             }
         });
